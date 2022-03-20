@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './styles.css';
+import spotifyLogo from './spotifyLogo.png';
 
 function App() {
 
@@ -36,11 +37,23 @@ function App() {
     )
   }
 
+  const profileStatusButton = !token ? 
+    <a className = "waves-effect waves-light btn green rounded"
+        href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=${responseType}`}>login to spotify</a> :
+    <button onClick={logout}>Log Out</button>
 
 
   return (
-    <div className="App">
-      {!token ? <a href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=${responseType}`}>Login to Spotify</a> : <button onClick={logout}> Log Out</button>}
+    <div>
+      <nav className = "z-depth-0 black">
+        <div class="nav-wrapper container">
+          <a href="#" className ="brand-logo">vibeify</a>
+          <ul id="nav-mobile" className ="right hide-on-med-and-down">
+            <li><a>stats explained</a></li>
+            <li>{profileStatusButton}</li>
+          </ul>
+        </div>
+      </nav>
     </div>
   );
 }
