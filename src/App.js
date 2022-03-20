@@ -14,6 +14,7 @@ function App() {
   const [token, setToken] = useState("")
   const [playlists, setPlaylists] = useState([])
   const [mainPlaylist, setMainPlaylist] = useState({})
+  const [tracks, setTracks] = useState([])
 
   useEffect(() => {
     const hash = window.location.hash
@@ -46,10 +47,30 @@ function App() {
 
   const displayPlaylists = playlists.map(playlist => {
     return (
-      <button className = "waves-effect waves-light btn pink rounded" key={playlist.id}> 
+      <button className = "waves-effect waves-light btn pink rounded" key={playlist.id} onClick={() => {setMainPlaylist(playlist);}}> 
       <i class="large library_musicmaterial-icons">library_music</i>{playlist.name}</button>
     );
   });
+
+  const displayMainPlaylist = () => {
+    return (
+      <div>
+        <p>{mainPlaylist.id}</p>
+        <p>{mainPlaylist.name}</p>
+        <button onClick={getSongs}>Get Songs</button>
+      </div>
+    )
+  }
+
+  const getSongs = async (e) => {
+    axios.get(`https://api.spotify.com/v1/playlists/${mainPlaylist.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then((response) => {
+      setTracks(response.data.tracks.items)
+    })
+  }
 
   const profileStatusButton = !token ? 
     <a className = "waves-effect waves-light btn pink rounded"
@@ -101,7 +122,13 @@ function App() {
     <div className = "section"></div>
     <h1>Select your playlist</h1>
     <button className = "waves-effect waves-light btn-large pink rounded" onClick={getPlaylist}>fetch your playlists...</button>
-         {displayPlaylists}
+         {!mainPlaylist.id && displayPlaylists}
+         {mainPlaylist.id && displayMainPlaylist()}
+         
+         
+         
+         
+         
      </div> 
     </div>
         <div className= "section"></div>
