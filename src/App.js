@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './styles.css';
+import spotifyLogo from './spotifyLogo.png';
 
 function App() {
 
@@ -41,24 +42,29 @@ function App() {
       setPlaylists(response.data.items)
     })
   }
-
   const displayPlaylists = playlists.map(playlist => {
     return (
       <button key={playlist.id}>{playlist.name}</button>
     )
   })
 
- // function selectedPlaylist(playlist) {
- //   setMainPlaylist(playlist)
-    // calcAverageStats(playlist) TO IMPLEMENT
-  //}
-
-  // ONCE AVERAGE STATS CALCULATED, DISPLAY WITH FUNC HERE
+  const profileStatusButton = !token ? 
+    <a className = "waves-effect waves-light btn green rounded"
+        href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=${responseType}`}>login to spotify</a> :
+    <button className = "waves-effect waves-light btn green rounded" onClick = {logout}>Log Out</button>
 
 
   return (
-    <div className="App">
-      {!token ? <a href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=${responseType}`}>Login to Spotify</a> : <button onClick={logout}> Log Out</button>}
+    <div>
+      <nav className = "z-depth-0 black">
+        <div class="nav-wrapper container">
+          <a href="#" className ="brand-logo">vibeify</a>
+          <ul id="nav-mobile" className ="right hide-on-med-and-down">
+            <li><a>stats explained</a></li>
+            <li>{profileStatusButton}</li>
+          </ul>
+        </div>
+      </nav>
       <button onClick={getPlaylist}>Fetch Your Playlists</button>
       {displayPlaylists}
     </div>
