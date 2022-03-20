@@ -15,6 +15,10 @@ function App() {
   const [playlists, setPlaylists] = useState([])
   const [mainPlaylist, setMainPlaylist] = useState({})
   const [tracks, setTracks] = useState([])
+  const [danceability, setDanceability] = useState([])
+  const [energy, setEnergy] = useState([])
+  const [valence, setValence] = useState([])
+  const [acousticness, setAcousticness] = useState([])
 
   useEffect(() => {
     const hash = window.location.hash
@@ -57,18 +61,34 @@ function App() {
       <div>
         <p>{mainPlaylist.id}</p>
         <p>{mainPlaylist.name}</p>
-        <button onClick={getSongs}>Get Songs</button>
+        {!tracks.data ? <button onClick={getSongs}>Get Songs</button> : <p> </p>}
       </div>
     )
   }
 
   const getSongs = async (e) => {
-    axios.get(`https://api.spotify.com/v1/playlists/${mainPlaylist.id}`, {
+    axios.get(`https://api.spotify.com/v1/playlists/${mainPlaylist.id}/tracks`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }).then((response) => {
-      setTracks(response.data.tracks.items)
+      setTracks(response)
+    })
+  }
+
+  function getTrackDetails() {
+    tracks.items.forEach(track => {
+      axios.get(`https://api.spotify.com/v1/audio-features/${track.track.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(response => {
+        
+        valence[valence.length] = response.data.valence
+        energy[energy.length] = response.data.energy
+        danceability[danceability.length] = response.data.danceability
+        acousticness[acousticness.length] = response.data.acousticness
+      })
     })
   }
 
@@ -124,6 +144,7 @@ function App() {
     <button className = "waves-effect waves-light btn-large pink rounded" onClick={getPlaylist}>fetch your playlists...</button>
          {!mainPlaylist.id && displayPlaylists}
          {mainPlaylist.id && displayMainPlaylist()}
+         {tracks.data && <button onClick={getTrackDetails}>Retrieve Details</button>}
          
          
          
