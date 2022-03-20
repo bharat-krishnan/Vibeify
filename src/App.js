@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './styles.css';
-import spotifyLogo from './spotifyLogo.png';
+import spotifyLogo from './sl3.png';
+import logo from './vibeifyLogo.png';
 
 function App() {
 
@@ -42,17 +43,80 @@ function App() {
       setPlaylists(response.data.items)
     })
   }
+
   const displayPlaylists = playlists.map(playlist => {
     return (
-      <button key={playlist.id}>{playlist.name}</button>
-    )
-  })
+      <button className = "waves-effect waves-light btn pink rounded" key={playlist.id}> 
+      <i class="large library_musicmaterial-icons">library_music</i>{playlist.name}</button>
+    );
+  });
 
   const profileStatusButton = !token ? 
-    <a className = "waves-effect waves-light btn green rounded"
+    <a className = "waves-effect waves-light btn pink rounded"
         href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=${responseType}`}>login to spotify</a> :
-    <button className = "waves-effect waves-light btn green rounded" onClick = {logout}>Log Out</button>
+    <button className = "waves-effect waves-light btn grey darken-3 rounded" onClick = {logout}>Log Out</button>
 
+  let centerDisplay;
+  
+  if(!token){
+    centerDisplay = (
+      <div>
+            <div className= "section"></div>
+            <div className= "section"></div>
+            <div className= "section"></div>
+            <div className= "section"></div>
+        <div className = "row">
+        <div className = "col m6 offset-m3">
+          <h1>Welcome to vibeify</h1>
+          <h5>analytics on your favorite playlists</h5>
+          <div className= "section"></div>
+          <a className = "waves-effect waves-light btn-large pink rounded"
+            href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=${responseType}`}>
+              <img className = "logImg" src = {spotifyLogo} width = "40"></img>
+              <span className = "logTxt">login to spotify</span></a>
+        </div>
+        <div className = "col m2 float-area">
+          <img className = "floating-img" style = {{float: "right",paddingTop: 40}} height = "250" src = {logo}></img>
+        </div>
+      </div>
+      <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+      </div>);
+  }
+  else{
+    //should automatically display playlists first
+    // getPlaylist();
+    centerDisplay = ( 
+    <div>
+    <div className = "row">
+    <div className = "col m6 offset-m3">
+    <div className = "section"></div>
+    <div className = "section"></div>
+    <div className = "section"></div>
+    <h1>Select your playlist</h1>
+    <button className = "waves-effect waves-light btn-large pink rounded" onClick={getPlaylist}>fetch your playlists...</button>
+         {displayPlaylists}
+     </div> 
+    </div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+        <div className= "section"></div>
+    </div>);
+  }
 
   return (
     <div>
@@ -60,13 +124,42 @@ function App() {
         <div class="nav-wrapper container">
           <a href="#" className ="brand-logo">vibeify</a>
           <ul id="nav-mobile" className ="right hide-on-med-and-down">
-            <li><a>stats explained</a></li>
+            <li><a href="#stats" >stats explained</a></li>
             <li>{profileStatusButton}</li>
           </ul>
         </div>
       </nav>
-      <button onClick={getPlaylist}>Fetch Your Playlists</button>
-      {displayPlaylists}
+
+      <div className = "container">
+  
+        {centerDisplay}
+
+
+        <div id = "stats" className = "row">
+          <div className = "col m6 offset-m3">
+          <div className = "section"></div>
+            <h3>stats explained</h3>
+            <ul className="blackList collection blackList">
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <br></br>
+            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <br></br>
+            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <br></br>
+            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <br></br>
+            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <br></br>
+            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
+
+      </ul>
+          </div>
+        </div>
+      </div>
     </div>
     
   );
