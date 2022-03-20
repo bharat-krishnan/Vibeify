@@ -30,6 +30,12 @@ function App() {
     window.localStorage.removeItem("token")
   }
 
+  const getUserPlaylists = async (e) => {
+    e.preventDefault()
+    const lists = await axios.get(`https://api.spotify.com/v1/me/playlists`,
+    )
+  }
+
 
 
   return (
