@@ -188,22 +188,19 @@ function App() {
           <div className = "section"></div>
             <h3>stats explained</h3>
             <ul className="blackList collection blackList">
-            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: valence</span>
             <br></br>
-            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
-            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <span>describes the musical positiveness conveyed by the song; high valence tracks sound more happy, cheerful, or euphoric, while low valence tracks sound more sad, depressed, or angry; measured from 0.0 to 1.0 </span></li>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: danceability </span>
             <br></br>
-            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
-            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <span>describes how suitable a track is for dancing; based on a combination of musical elements such as tempo, rhythm, beat strength, etc.; measured from 0.0 to 1.0</span></li>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: energy</span>
             <br></br>
-            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
-            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
+            <span>measures the perceived intensity and activeness of a track; a high energy track tends to feel fast, loud, or noisy; measured from 0.0 to 1.0</span></li>
+            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: acousticness</span>
             <br></br>
-            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
-            <li className="blackList collection-item"><span style = {{fontWeight: "bold"}}>attribute: </span>
-            <br></br>
-            <span>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</span></li>
-
+            <span>a confidence measure describing how acoustic a track is; measured from 0.0 to 1.0 where a rating of 1.0 represents a high confidence that the track is acoustic</span></li>
+            
       </ul>
           </div>
         </div>
